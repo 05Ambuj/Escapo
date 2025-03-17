@@ -71,7 +71,7 @@ export const LeftBar = () => {
       <div className="flex flex-col gap-4 text-lg items-center xxl:items-start">
         {/* LOGO */}
         <Link href="/" className="hover:bg-[#181818] p-2 rounded-full">
-          <Image path="icons/logo.svg" alt="logo" w={24} h={24} />
+          <Image path="icons/AppLogo.svg" alt="logo" w={29} h={29} />
         </Link>
         {/* MENU */}
         <div className="flex flex-col gap-2">

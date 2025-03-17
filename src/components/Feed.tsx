@@ -1,6 +1,14 @@
+import Post from "./Post";
+
 const Feed=()=>{
     return (
-        <div className="">Feed</div>
+        <div className="">
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+        </div>
     )
 }
 
