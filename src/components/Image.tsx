@@ -21,7 +21,7 @@ const Image = ({ path, w, h, alt, className, transform }: ImageType) => {
       {...(transform
         ? { transformation: [{ width: `${w}`, height: `${h}` }] }
         : { width: w, height: h })}
-      lqip={{active: true, quality: 20}}
+      // lqip={{active: true, quality: 20}}
       className={className}
     />
   );
