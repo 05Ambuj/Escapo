@@ -1,8 +1,34 @@
+import ImageKit from "imagekit";
 import Image from "./Image";
 import PostInfo from "./PostInfo";
 import PostInteraction from "./PostInteraction";
+import { imagekit } from "@/utils";
+import Video from "./Video";
 
-const Post = () => {
+interface FileDetailsResponse {
+  width: number;
+  height: number;
+  filePath: string;
+  fileType: string;
+  customMetadata?: { sensitive: boolean };
+  url: string;
+}
+
+const Post = async () => {
+  const getFileDetails = async (
+    fileId: string
+  ): Promise<FileDetailsResponse> => {
+    return new Promise((resolve, reject) => {
+      imagekit.getFileDetails(fileId, function (error, result) {
+        if (error) reject(error);
+        else resolve(result as FileDetailsResponse);
+      });
+    });
+  };
+
+  const fileDetails = await getFileDetails("67dc6794432c47641620f50e");
+  console.log(fileDetails);
+
   return (
     <div className="p-4 border-y-[1px] border-borderGray">
       {/* POST TYPE */}
@@ -50,7 +76,20 @@ const Post = () => {
             necessitatibus voluptas soluta, mollitia nam, ipsum similique a
             velit cumque atque delectus earum?
           </p>
-          <Image path="general/post.jpeg" alt="Post" w={600} h={600} />
+          {/* IMAGE */}
+          {/* <Image path="post/luffy.jpg" alt="Post" w={600} h={600} /> */}
+          {fileDetails && fileDetails.fileType === "image" ? (
+            <Image
+              path={fileDetails.filePath}
+              alt="Post"
+              w={fileDetails.width}
+              h={fileDetails.height}
+              className={fileDetails.customMetadata?.sensitive? "blur-lg": ""}
+            />
+          ) : (
+            <Video path={fileDetails.filePath} className={fileDetails.customMetadata?.sensitive? "blur-lg w-50 h-50": "w-50 h-50"}
+/>
+          )}
           <PostInteraction />
         </div>
       </div>
